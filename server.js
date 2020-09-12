@@ -1,23 +1,22 @@
-const express = require('express');
-const path = require("path");
-const app = express();
-const port = 5500;
+const express = require('express'),
+      path = require("path"),
+      app = express(),
+      port = 5500;
 
 let usrMvs = {};
 
 app.use(express.static('public'));
 
 function checkMovies() {
-    if (Object.keys(usrMvs).length != 2 || usrMvs[Object.keys(usrMvs)[0]].length < 1 || usrMvs[Object.keys(usrMvs)[1]].length < 1)
-        return false;
-    
     for (movie in usrMvs[Object.keys(usrMvs)[0]]) {
-        for (movie2 in usrMvs[Object.keys(usrMvs)[1]]) {
-            if (usrMvs[Object.keys(usrMvs)[0]][movie] == usrMvs[Object.keys(usrMvs)[1]][movie2])
-                return usrMvs[Object.keys(usrMvs)[0]][movie];
+        let found = 0;
+        for (i = 1; i < Object.keys(usrMvs).length; i++) {
+            console.log(`Searching for ${usrMvs[Object.keys(usrMvs)[0]][movie]} in ${usrMvs[Object.keys(usrMvs)[i]]}`);
+            if (usrMvs[Object.keys(usrMvs)[i]].includes(usrMvs[Object.keys(usrMvs)[0]][movie]))
+                found++;
         }
+        if (found == Object.keys(usrMvs).length - 1) return usrMvs[Object.keys(usrMvs)[0]][movie];
     }
-
     return false;
 }
 
@@ -42,7 +41,7 @@ app.get('/add/:usr/:movie', (req, res) => {
 
 app.get('/setUser/:usr', (req, res) => {
 
-    if(!usrMvs[req.params["usr"]] && Object.keys(usrMvs).length < 2) {
+    if(!usrMvs[req.params["usr"]]) {
         usrMvs[req.params["usr"]] = [];
         res.send("200");
     }
@@ -54,5 +53,5 @@ app.get('/setUser/:usr', (req, res) => {
 
 app.listen(port, () => {
     app.use(express.static(path.join(__dirname, 'public')));
-    console.log(`Server at http://localhost:${port}`);
+    console.log(`Server at localhost:${port}`);
 });
