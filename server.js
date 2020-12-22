@@ -1,7 +1,7 @@
 const express = require('express'),
       path = require("path"),
       app = express(),
-      port = 5500;
+      port = 8080;
 
 let usrMvs = {};
 
