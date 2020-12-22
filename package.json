@@ -1,0 +1,28 @@
+{
+  "name": "movieswipe",
+  "version": "1.0.0",
+  "description": "Movie Swipe App",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ocramoi/movieSwipe.git"
+  },
+  "keywords": [
+    "movies",
+    "tinder",
+    "matching"
+  ],
+  "author": "Marco Toledo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ocramoi/movieSwipe/issues"
+  },
+  "homepage": "https://github.com/Ocramoi/movieSwipe#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
